@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// Explanation of the Prisma schema file
+
+// This schema defines the data model for a web application, likely an accommodation
+// booking platform similar to Airbnb. It uses MongoDB as the database and generates
+// a Prisma client for JavaScript/TypeScript.
+
+// Configuration
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// Models
+// The schema defines four main models: User, Account, Listing, and Reservation.
+
+// User Model:
+// Represents application users with fields for basic information and authentication.
+// It also tracks creation and update times, and stores favorite listing IDs.
+// Relations: accounts, listings, reservations
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  emailVerified DateTime?
+  image       String?
+  name      String?
+  hashedPassword String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  favoriteIds String[] @db.ObjectId
+
+  accounts Account[]
+  listings Listing[]
+  reservations Reservation[]
+}
+
+// Account Model:
+// Represents OAuth accounts for users (e.g., Google, Facebook login).
+// Stores provider-specific information and tokens.
+// Relation: user
+model Account {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  type      String
+  provider  String
+  providerAccountId String
+  refresh_token String? @db.String
+  access_token String? @db.String
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String? @db.String
+  session_state String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+
+}
+
+// Listing Model:
+// Represents accommodation listings with details like title, description, amenities.
+// Relations: user (host), reservations
+model Listing {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  title     String
+  description String?
+  createdAt DateTime @default(now())
+  imageSrc String?
+  category String?
+  roomCount Int?
+  bathroomCount Int?
+  guestCount Int?
+  locationValue String?
+  price Int?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+
+}
+
+// Reservation Model:
+// Represents bookings made by users for listings.
+// Includes booking details like dates and price.
+// Relations: user (guest), listing
+model Reservation {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  listingId String @db.ObjectId
+  userId String @db.ObjectId
+  startDate DateTime
+  endDate DateTime
+  totalPrice Int?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+// This schema enables the following core functionalities:
+// 1. User authentication and profile management
+// 2. OAuth integration for third-party logins
+// 3. Listing creation and management
+// 4. Reservation system
+// 5. Favorite listings feature
+
+// The schema is designed to support a MongoDB database, utilizing ObjectId
+// for primary keys and establishing relationships between models.
+
+// To implement additional features like chat, user verification, or payments:
+// - New models (e.g., Message, Payment) would need to be added
+// - Existing models might require additional fields or relations
+// - Indexes could be added to improve query performance
+
+// When extending this schema, consider:
+// - Running 'prisma generate' after changes to update the Prisma Client
+// - Creating necessary migrations for relational databases
+// - Manually updating MongoDB schema if needed
+// - Security implications, especially for user data and payment features
+
+// This schema provides a solid foundation for a booking platform and can be
+// extended to support more advanced features as the application grows.
