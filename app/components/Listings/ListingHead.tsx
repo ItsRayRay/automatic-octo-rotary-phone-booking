@@ -6,7 +6,8 @@ import useCountries from "@/app/hooks/useCountries";
 
 import Image from "next/image";
 import Heading from "@/app/components/Heading";
-import HeartButton from "@/app/components/HeartButton";
+import HeartButton from "../HeartButton";
+
 interface ListingHeadProps {
     title: string;
     imageSrc: string;
@@ -43,7 +44,7 @@ const ListingHead: React.FC<ListingHeadProps> = ({
                     />
 
                     <div className="absolute top-5 right-5">
-                        <HeartButton
+                        <HeartButton 
                             listingId={id}
                             currentUser={currentUser}
                         />
