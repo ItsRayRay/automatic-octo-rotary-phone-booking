@@ -2,7 +2,7 @@
 
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 
 
@@ -16,21 +16,12 @@ interface ImageUploadProps {
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
-  const [uploadedImage, setUploadedImage] = useState(value);
 
-  useEffect(() => {
-    setUploadedImage(value);
-  }, [value]);
 
   const handleUpload = useCallback(
     (result: any) => {
-      const newValue = result.info.secure_url;
-      setUploadedImage(newValue);
-      onChange(newValue);
-      console.log("Image uploaded:", newValue); // Debug log
-    },
-    [onChange]
-  );
+      onChange(result.info.secure_url);
+    },[onChange]);
 
   return (
     <div className="relative">
@@ -44,7 +35,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
         {({ open }) => {
           return (
             <div
-              onClick={() => open?.()}
+              onClick={() => open()}
               className="
                 relative
                 cursor-pointer
@@ -64,23 +55,22 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
             >
               <TbPhotoPlus size={50} />
               <div className="font-semibold text-lg">
-                {uploadedImage ? "Change Image" : "Click to upload"}
+                Click to upload
               </div>
+              { value && (
+                <div className="absolute inset-0 w-full h-full">
+                  <Image 
+                    alt="Upload" 
+                    fill 
+                    style={{ objectFit: "cover" }} 
+                    src={value} 
+                  />
+                </div>
+              )}
             </div>
           );
         }}
       </CldUploadWidget>
-      {uploadedImage && (
-        <div className="absolute inset-0 w-full h-full">
-          <Image 
-            alt="Upload" 
-            fill 
-            style={{ objectFit: "cover" }} 
-            src={uploadedImage} 
-            onError={() => console.error("Image failed to load:", uploadedImage)} // Debug log
-          />
-        </div>
-      )}
     </div>
   );
 };

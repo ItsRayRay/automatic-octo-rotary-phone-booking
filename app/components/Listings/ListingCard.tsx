@@ -4,7 +4,7 @@ import { Listing, Reservation } from "@prisma/client";
 import { SafeUser } from "@/app/types";
 import useCountries from "@/app/hooks/useCountries";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { format } from "date-fns";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
@@ -34,7 +34,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
   const { getByValue } = useCountries();
 
-  const location = getByValue(data.locationValue);
+  const location = getByValue(data.locationValue ?? '');
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -66,18 +66,21 @@ const ListingCard: React.FC<ListingCardProps> = ({
     return `${format(start, "PP")} - ${format(end, "PP")}`;
   }, [reservation]);
 
+  const [imgSrc, setImgSrc] = useState(data.imageSrc || "/images/placeholder.jpg");
+
   return (
     <div
       onClick={() => router.push(`/listings/${data.id}`)}
-      className="col-span-1 cursor-pointer group mt-5" //mt-5 to move the card down
+      className="col-span-1 cursor-pointer group mt-5"
     >
       <div className="flex flex-col gap-2 w-full">
         <div className="aspect-square w-full relative overflow-hidden rounded-xl">
           <Image
             fill
             className="object-cover h-full w-full group-hover:scale-110 transition"
-            src={data.imageSrc}
+            src={imgSrc}
             alt="Listing"
+            onError={() => setImgSrc("/images/placeholder.jpg")}
           />
           <div className="absolute top-3 right-3">
             <HeartButton listingId={data.id} currentUser={currentUser} />

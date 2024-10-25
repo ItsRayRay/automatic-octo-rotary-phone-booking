@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic'
+
+
 import { Nunito } from "next/font/google"
 import Navbar from "./components/navbar/Navbar";
 
@@ -47,3 +50,4 @@ export default async function RootLayout({
     </html>
   );
 }
+
