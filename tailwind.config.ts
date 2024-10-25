@@ -11,9 +11,13 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        rose: {
+          500: '#111111', // This changes rose-500 to a very dark gray //TODO: Change this to a lighter color
+        },
       },
     },
   },
   plugins: [],
 };
+
 export default config;
