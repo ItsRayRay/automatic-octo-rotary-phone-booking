@@ -16,7 +16,7 @@ import { ToasterProvider } from "./providers/ToasterProvider";
 import getCurrentUser from "./actions/getCurrentUser";
 
 import ClientOnly from "./components/ClientOnly";
-
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "EVENTOS", // TODO: Change to the actual name of the app
@@ -46,8 +46,8 @@ export default async function RootLayout({
         <Navbar currentUser={currentUser} />
         </ClientOnly>
         <div className="pb-20 pt-28">{children}</div> 
-        </body>
+        <Script src="https://upload-widget.cloudinary.com/global/all.js" strategy="beforeInteractive" />
+      </body>
     </html>
   );
 }
-

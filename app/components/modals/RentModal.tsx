@@ -70,10 +70,11 @@ const RentModal = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setCustomValue = (id: string, value: any) => {
+    console.log(`Setting custom value for ${id}:`, value);
     setValue(id, value, {
+      shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
-      shouldValidate: true,
     });
   };
 
@@ -92,18 +93,21 @@ const RentModal = () => {
       return onNext();
     }
 
+    console.log("Form data before submission:", data);
+
     setIsLoading(true);
 
-    axios.post("/api/listings", data)
+    axios.post('/api/listings', data)
       .then(() => {
-        toast.success("Listing created successfully");
+        toast.success('Listing created!');
         router.refresh();
         reset();
         setStep(STEPS.CATEGORY);
         rentModal.onClose();
       })
       .catch((error) => {
-        toast.error("Something went wrong");
+        console.error("Error creating listing:", error);
+        toast.error('Something went wrong.');
       })
       .finally(() => {
         setIsLoading(false);
