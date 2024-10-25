@@ -6,11 +6,16 @@ import Search from "./Search";
 import UserMenu from "./UserMenu";
 import { SafeUser } from "@/app/types";
 import Categories from "./Categories";
+import { usePathname } from 'next/navigation';
+
 interface NavbarProps {
   currentUser?: SafeUser | null;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+  const pathname = usePathname();
+  const isMainPage = pathname === '/';
+
   console.log(currentUser);
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
@@ -23,7 +28,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
           </div>
         </Container>
       </div>
-      <Categories /> 
+      {isMainPage && <Categories />}
     </div>
   );
 };
