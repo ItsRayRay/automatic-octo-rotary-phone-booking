@@ -12,6 +12,8 @@ import { ToasterProvider } from "./providers/ToasterProvider";
 
 import getCurrentUser from "./actions/getCurrentUser";
 
+import ClientOnly from "./components/ClientOnly";
+
 
 export const metadata: Metadata = {
   title: "EVENTOS", // TODO: Change to the actual name of the app
@@ -33,12 +35,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+        <ClientOnly>
         <ToasterProvider />
         <RegisterModal />
         <RentModal />
         <LoginModal />
         <Navbar currentUser={currentUser} />
-        {children}
+        </ClientOnly>
+        <div className="pb-20 pt-28">{children}</div> 
         </body>
     </html>
   );

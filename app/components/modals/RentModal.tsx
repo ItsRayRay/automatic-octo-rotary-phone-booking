@@ -18,7 +18,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 
-
+//TODO: Fix image bug upload
 
 enum STEPS {
   CATEGORY = 0,
@@ -68,6 +68,7 @@ const RentModal = () => {
   });
   
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldDirty: true,

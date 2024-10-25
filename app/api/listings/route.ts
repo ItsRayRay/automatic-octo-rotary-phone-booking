@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+//TODO: More data in the listing
+
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
