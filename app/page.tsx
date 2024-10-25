@@ -6,6 +6,7 @@ import EmptyState from "./components/EmptyState";
 import getListings from "./actions/getListings";
 import ListingCard from "./components/Listings/ListingCard"
 import getCurrentUser from "./actions/getCurrentUser";
+import { SafeListing } from "./types";
 
 
 
@@ -37,7 +38,7 @@ export default async function Home() {
         2xl:grid-cols-6
           gap-8
         ">
-         {listings.map((listing: any) => {
+         {listings.map((listing: SafeListing) => {
           return (
           <ListingCard
           currentUser={currentUser}

@@ -57,3 +57,5 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
 
     return NextResponse.json(user);
 }
+
+
