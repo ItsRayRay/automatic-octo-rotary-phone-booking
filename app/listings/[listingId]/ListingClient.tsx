@@ -1,3 +1,4 @@
+"use client";
 
 import { SafeListing, SafeUser, SafeReservation } from "@/app/types";
 
@@ -30,7 +31,7 @@ interface ListingClientProps {
     user: SafeUser;
   };
   currentUser?: SafeUser | null;
-  safeReservations?: SafeReservation[];
+  reservations?: SafeReservation[];
 }
 
 const ListingClient: React.FC<ListingClientProps> = ({
@@ -75,7 +76,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
     })
     .then(() => {
       toast.success("Listing reserved!");
-      router.refresh();
+      router.push("/trips");
     })
     .catch(() => {
       toast.error("Something went wrong.");
