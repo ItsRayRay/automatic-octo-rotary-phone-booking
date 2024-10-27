@@ -3804,6 +3804,13 @@ raw-body@2.3.3:
     iconv-lite "0.4.23"
     unpipe "1.0.0"
 
+react-confetti@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-confetti/-/react-confetti-6.1.0.tgz#03dc4340d955acd10b174dbf301f374a06e29ce6"
+  integrity sha512-7Ypx4vz0+g8ECVxr88W9zhcQpbeujJAVqL14ZnXJ3I23mOI9/oBVTQ3dkJhUmB0D6XOtCZEM6N0Gm9PMngkORw==
+  dependencies:
+    tween-functions "^1.2.0"
+
 react-date-range@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-date-range/-/react-date-range-2.0.1.tgz#d8a3feddaa50eee484e8ff8ebe08076c9ce9c811"
@@ -3821,6 +3828,11 @@ react-dom@^18:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
+
+react-fireworks@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-fireworks/-/react-fireworks-1.0.4.tgz#7666658fd3273301a398a88d15b9857972c44c6c"
+  integrity sha512-jj1a+HTicB4pR6g2lqhVyAox0GTE0TOrZK2XaJFRYOwltgQWeYErZxnvU9+zH/blY+Hpmu9IKyb39OD3KcCMJw==
 
 react-hook-form@^7.53.1:
   version "7.53.1"
@@ -4581,6 +4593,11 @@ tsscmp@^1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/tsscmp/-/tsscmp-1.0.6.tgz#85b99583ac3589ec4bfef825b5000aa911d605eb"
   integrity sha512-LxhtAkPDTkVCMQjt2h6eBVY28KCjikZqZfMcC15YBeNjkgUpdCfBu5HoiOTDu86v6smE8yOjyEktJ8hlbANHQA==
+
+tween-functions@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/tween-functions/-/tween-functions-1.2.0.tgz#1ae3a50e7c60bb3def774eac707acbca73bbc3ff"
+  integrity sha512-PZBtLYcCLtEcjL14Fzb1gSxPBeL7nWvGhO5ZFPGqziCcr8uvHp0NDmdjBchp6KHL+tExcg0m3NISmKxhU394dA==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

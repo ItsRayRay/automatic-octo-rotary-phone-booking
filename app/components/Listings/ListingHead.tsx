@@ -10,7 +10,7 @@ import HeartButton from "../HeartButton";
 
 interface ListingHeadProps {
     title: string;
-    imageSrc: string;
+    imageSrc: string | null;
     locationValue: string;
     id: string;
     currentUser?: SafeUser | null;
@@ -22,35 +22,30 @@ const ListingHead: React.FC<ListingHeadProps> = ({
     locationValue,
     id,
     currentUser,
-
 }) => {
     const { getByValue } = useCountries();
-
     const location = getByValue(locationValue);
 
     return (
         <div>
-            <>
-                <Heading
-                    title={title}
-                    subtitle={`${location?.region}, ${location?.label}`}
+            <Heading
+                title={title}
+                subtitle={location ? `${location.region}, ${location.label}` : 'Unknown location'}
+            />
+            <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
+                <Image
+                    src={imageSrc || '/images/placeholder.jpg'}
+                    fill
+                    className="object-cover w-full h-full"
+                    alt="Listing"
                 />
-                <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
-                    <Image
-                        src={imageSrc}
-                        fill
-                        className="object-cover w-full h-full"
-                        alt="Image"
+                <div className="absolute top-5 right-5">
+                    <HeartButton 
+                        listingId={id}
+                        currentUser={currentUser}
                     />
-
-                    <div className="absolute top-5 right-5">
-                        <HeartButton 
-                            listingId={id}
-                            currentUser={currentUser}
-                        />
-                    </div>
                 </div>
-            </>
+            </div>
         </div>
     );
 }

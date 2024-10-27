@@ -19,7 +19,40 @@ body,
   width: 100% !important;
 }
 
-.rdrDefinedRanges {
+.rdrCalendarWrapper {
   font-size: 16px !important;
   width: 100% !important;
+}
+
+.rdrDateDisplayWrapper {
+  background-color: #f7f7f7;
+}
+
+.rdrDateDisplay {
+  margin: 0.5rem;
+}
+
+.rdrMonthAndYearWrapper {
+  padding-top: 0.5rem;
+}
+
+.rdrMonthAndYearPickers select {
+  font-size: 16px;
+}
+
+.rdrDay {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+.rdrDayNumber span {
+  font-size: 14px;
+}
+
+.rdrDayToday .rdrDayNumber span:after {
+  bottom: 4px;
 }
