@@ -5,6 +5,12 @@ import { useEffect, useCallback, useState } from "react";
 import Image from "next/image";
 import { TbPhotoPlus } from "react-icons/tb";
 
+declare global {
+  interface Window {
+    cloudinary: any;
+  }
+}
+
 interface ImageUploadProps {
   onChange: (value: string) => void;
   value: string;

@@ -31,6 +31,7 @@ export default async function getListingById(params: IParams) {
         };
 
     } catch (error) {
-        throw new Error(error);
+        console.error('Error fetching listing:', error);
+        return null;
     }
 }
